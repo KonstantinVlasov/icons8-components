@@ -1,6 +1,6 @@
 {
   "name": "icons8-components",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Icons8 Vue components",
   "main": "dist/icons8-components.js",
   "dependencies": {},
