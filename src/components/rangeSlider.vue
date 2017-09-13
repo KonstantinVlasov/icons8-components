@@ -12,12 +12,8 @@
 
 <script>
   let isDragging = false
-  let supportTouch = false
-  if (process.browser) {
-    supportTouch = 'ontouchstart' in window
-  }
 
-  const draggable = function (element, options) {
+  const draggable = function (element, supportTouch, options) {
     const moveFn = function (event) {
       if (options.drag) {
         options.drag(supportTouch ? event.changedTouches[0] || event.touches[0] : event)
@@ -129,7 +125,7 @@
         }
       }
       let dragState = {}
-      draggable(handle, {
+      draggable(handle, 'ontouchstart' in window, {
         start: () => {
           if (this.disabled) return
           const position = handlePos()

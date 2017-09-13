@@ -15,6 +15,8 @@ import rangeSlider from './src/components/rangeSlider.vue'
 import shareIcon from './src/components/shareIcon.vue'
 import shareLink from './src/components/shareLink.vue'
 
+import nuxtLink from './src/components/nuxtLink.vue'
+
 /**
  * @param store.registerModule
  * @param config.apiUrl
@@ -24,8 +26,8 @@ export default {
   install: function (Vue, {store, config}) {
     store.registerModule('auth', authStore(config))
 
-    Vue.use('app-modal', appModal)
-    Vue.use('app-notify', appNotify)
+    Vue.use(appModal)
+    Vue.use(appNotify)
 
     Vue.component('app-menu', appMenu)
     Vue.component('app-popup', appPopup)
@@ -36,5 +38,9 @@ export default {
     Vue.component('range-slider', rangeSlider)
     Vue.component('share-icon', shareIcon)
     Vue.component('share-link', shareLink)
+
+    if (!Vue.options.components['nuxt-link']) {
+      Vue.component('nuxt-link', nuxtLink)
+    }
   }
 }
