@@ -1,10 +1,14 @@
 {
   "name": "icons8-components",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Icons8 Vue components",
   "main": "dist/icons8-components.js",
-  "dependencies": {},
+  "dependencies": {
+    "axios": "^0.16.2",
+    "normalize.css": "^7.0.0"
+  },
   "devDependencies": {
+    "autoprefixer": "^7.1.4",
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.0.0",
     "babel-loader": "^7.1.2",
@@ -27,9 +31,10 @@
     "eslint-plugin-vue": "^2.1.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "node-sass": "^4.5.3",
-    "normalize.css": "^7.0.0",
+    "postcss-loader": "^2.0.6",
     "pug": "^2.0.0-rc.4",
     "sass-loader": "^6.0.6",
+    "style-loader": "^0.18.2",
     "svg-inline-loader": "^0.8.0",
     "vue": "^2.4.3",
     "vue-eslint-parser": "^1.0.0",
@@ -37,12 +42,15 @@
     "vue-loader": "^13.0.4",
     "vue-style-loader": "^3.0.2",
     "vue-template-compiler": "^2.4.3",
+    "vuex": "^2.4.0",
     "webpack": "^3.5.6",
     "webpack-merge": "^4.1.0"
   },
   "scripts": {
     "dev": "nodemon server.js",
-    "build": "rimraf ./dist && cross-env NODE_ENV=production webpack --config ./webpack.config.js"
+    "build-js": "cross-env NODE_ENV=production webpack --config ./webpack.config.js",
+    "build-css": "cross-env NODE_ENV=production webpack --config ./webpack.styles.config.js",
+    "build": "npm run build-js && npm run build-css"
   },
   "repository": {
     "type": "git",

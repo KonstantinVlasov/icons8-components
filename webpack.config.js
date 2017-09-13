@@ -8,24 +8,32 @@ const config = {
     path: path.join(__dirname, '/dist/')
   },
   module: {
-    loaders: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        include: __dirname,
-        exclude: /node_modules/
-      },
-      {
-        test: /\.vue$/,
-        loader: 'vue-loader',
-        options: {
-          extractCSS: true
-        }
+    loaders: [{
+      test: /\.js$/,
+      loader: 'babel-loader',
+      include: __dirname,
+      exclude: /node_modules/
+    }, {
+      test: /\.vue$/,
+      loader: 'vue-loader',
+      options: {
+        extractCSS: true
       }
-    ]
+    }, {
+      test: /\.svg$/,
+      loader: 'svg-inline-loader',
+      exclude: /node_modules/
+    }, {
+      test: /\.(png|jpg|gif)$/,
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]?[hash]'
+      }
+    }]
   },
   externals: {
-    moment: 'moment'
+    axios: 'axios',
+    vuex: 'vuex'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
