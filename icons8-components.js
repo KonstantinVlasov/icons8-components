@@ -5,6 +5,8 @@ import authStore from './src/store/auth'
 import appModal from './src/components/appModal'
 import appNotify from './src/components/appNotify'
 
+import ensureLogin from './src/plugins/ensureLogin'
+
 import appMenu from './src/components/appMenu.vue'
 import appPopup from './src/components/appPopup.vue'
 import colorPicker from './src/components/colorPicker.vue'
@@ -28,6 +30,8 @@ export default {
 
     Vue.use(appModal)
     Vue.use(appNotify)
+
+    Vue.use(ensureLogin)
 
     Vue.component('app-menu', appMenu)
     Vue.component('app-popup', appPopup)
