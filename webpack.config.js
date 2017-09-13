@@ -1,5 +1,6 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path')
 
 const config = {
@@ -16,7 +17,10 @@ const config = {
       },
       {
         test: /\.vue$/,
-        loader: 'vue-loader'
+        loader: 'vue-loader',
+        options: {
+          extractCSS: true
+        }
       }
     ]
   },
@@ -31,6 +35,9 @@ const config = {
       compress: {
         warnings: false
       }
+    }),
+    new ExtractTextPlugin({
+      filename: 'icons8-components.css'
     })
   ]
 }
@@ -45,4 +52,4 @@ module.exports = [
       umdNamedDefine: true
     }
   })
-];
+]
