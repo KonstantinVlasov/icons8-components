@@ -3,7 +3,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  srcDir: 'docs/',
+  srcDir: 'docs-src/',
   head: {
     title: 'Icons 8 Components',
     meta: [
@@ -32,7 +32,7 @@ module.exports = {
   },
   cache: true,
   generate: {
-    dir: 'docs-dist'
+    dir: 'docs'
   },
   build: {
     vendor: [
