@@ -1,6 +1,10 @@
 # dependencies
 node_modules
 
+# Nuxt build
+.nuxt
+docs-dist
+
 # logs
 npm-debug.log
 
