@@ -67,6 +67,7 @@ module.exports = {
     }
   },
   router: {
+    base: '/icons8-components/',
     linkActiveClass: 'is-active',
     linkExactActiveClass: 'is-exact-active',
     scrollBehavior: function () {
