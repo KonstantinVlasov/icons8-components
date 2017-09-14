@@ -4,6 +4,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const path = require('path')
 
 const config = {
+  entry: path.join(__dirname, '/icons8-components.js'),
   output: {
     path: path.join(__dirname, '/dist/')
   },
@@ -50,9 +51,21 @@ const config = {
   ]
 }
 
+if (process.env.NODE_ENV !== 'production') {
+  config.devtool = '#cheap-module-eval-source-map'
+  config.plugins.push(new webpack.HotModuleReplacementPlugin())
+  config.plugins.push(new webpack.NoEmitOnErrorsPlugin())
+}
+
 module.exports = [
   merge(config, {
-    entry: path.join(__dirname, '/icons8-components.js'),
+    output: {
+      filename: 'icons8-components.min.js',
+      libraryTarget: 'window',
+      library: 'icons8Components'
+    }
+  }),
+  merge(config, {
     output: {
       filename: 'icons8-components.js',
       libraryTarget: 'umd',
