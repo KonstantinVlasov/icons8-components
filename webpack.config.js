@@ -26,15 +26,16 @@ const config = {
       exclude: /node_modules/
     }, {
       test: /\.(png|jpg|gif)$/,
-      loader: 'file-loader',
+      loader: 'url-loader',
       options: {
+        limit: 10000,
         name: '[name].[ext]?[hash]'
       }
     }]
   },
   externals: {
     axios: 'axios',
-    vuex: 'vuex'
+    vuex: 'Vuex'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
