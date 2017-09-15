@@ -1,5 +1,6 @@
 'use strict'
 
+const merge = require('webpack-merge')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
@@ -16,10 +17,10 @@ module.exports = {
       { name: 'description', hid: 'description', content: 'Pretty Icons 8 components for internal projects' }
     ],
     link: [
-      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons8-favicon.png' },
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icons8-favicon.png' },
-      { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/icons8-favicon.png' },
-      { rel: 'icon', type: 'image/png', sizes: '194x194', href: '/icons8-favicon.png' },
+      { rel: 'icon', type: 'image/png', sizes: '16x16', href: '/icons8-components/icons8-favicon.png' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icons8-components/icons8-favicon.png' },
+      { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/icons8-components/icons8-favicon.png' },
+      { rel: 'icon', type: 'image/png', sizes: '194x194', href: '/icons8-components/icons8-favicon.png' },
       { rel: 'stylesheet', href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-light.min.css' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Sanchez' }
     ]
@@ -40,31 +41,33 @@ module.exports = {
       'babel-polyfill'
     ],
     extend (config) {
-      config.plugins = config.plugins || []
-      config.plugins.push(new ExtractTextPlugin('styles.css'))
-
-      config.module.rules.push({
-        test: /\.css$/,
-        loader: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: 'css-loader'
-        })
-      })
-      config.module.rules.push({
-        test: /\.svg$/,
-        loader: 'svg-inline-loader',
-        exclude: /node_modules/
-      })
-      config.module.rules.push({
-        test: /(.*node_modules)(.*svg)(\?.*)?$/,
-        loader: 'url-loader',
-        query: {
-          limit: 10000,
-          name: 'imgs/[name].[hash:7].[ext]'
-        }
-      })
       const urlLoader = config.module.rules.find((rule) => rule.loader === 'url-loader')
       urlLoader.test = /\.(png|jpe?g|gif)$/
+      urlLoader.options.limit = 10000
+
+      return merge(config, {
+        module: {
+          rules: [{
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: 'css-loader'
+            })
+          }, {
+            test: /\.svg$/,
+            loader: 'svg-inline-loader',
+            exclude: /node_modules/
+          }, {
+            test: /(.*node_modules)(.*svg)(\?.*)?$/,
+            loader: 'url-loader',
+            query: {
+              limit: 10000,
+              name: 'imgs/[name].[hash:7].[ext]'
+            }
+          }]
+        },
+        plugins: [new ExtractTextPlugin('styles.css')]
+      })
     }
   },
   router: {

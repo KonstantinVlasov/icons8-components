@@ -76,7 +76,7 @@
 <style lang="scss">
   .content {
     margin: 0 auto;
-    padding: 0 0 4rem;
+    padding: 0 0 30rem;
     width: 960px;
 
     h3 {
