@@ -25,3 +25,7 @@
     }
   }
 </script>
+
+<style lang="scss">
+  @import '../assets/css/public';
+</style>

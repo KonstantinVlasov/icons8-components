@@ -79,8 +79,7 @@ module.exports = {
     }
   },
   css: [
-    {src: 'src/assets/css/public.scss', lang: 'scss'},
-    {src: 'docs-src/assets/css/public.scss', lang: 'scss'}
+    {src: 'src/assets/css/public.scss', lang: 'scss'}
   ],
   loading: {
     color: '#238836',
