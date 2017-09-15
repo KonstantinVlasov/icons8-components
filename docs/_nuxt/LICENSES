@@ -1,16 +1,4 @@
 /*!
- * Vue.js v2.4.4
- * (c) 2014-2017 Evan You
- * Released under the MIT License.
- */
-
-/**
- * vuex v2.4.0
- * (c) 2017 Evan You
- * @license MIT
- */
-
-/*!
  * Determine if an object is a Buffer
  *
  * @author   Feross Aboukhadijeh <feross@feross.org> <http://feross.org>
@@ -23,6 +11,18 @@
  * @license   Licensed under MIT license
  *            See https://raw.githubusercontent.com/stefanpenner/es6-promise/master/LICENSE
  * @version   4.1.1
+ */
+
+/*!
+ * Vue.js v2.4.4
+ * (c) 2014-2017 Evan You
+ * Released under the MIT License.
+ */
+
+/**
+ * vuex v2.4.0
+ * (c) 2017 Evan You
+ * @license MIT
  */
 
 /**

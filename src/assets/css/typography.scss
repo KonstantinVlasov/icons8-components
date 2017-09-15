@@ -15,11 +15,15 @@ h3 {
   font-size: 1.75rem;
 }
 
-h6 {
+h5, h6 {
   @include font-regular;
   font-size: 15px;
   text-align: center;
   text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+h6 {
   letter-spacing: 4px;
   margin: 2rem 0;
 }
@@ -30,4 +34,9 @@ p {
 
 b, strong {
   font-weight: 500;
+}
+
+pre, code {
+  font-family: Monaco, monospace;
+  font-size: 14px;
 }
