@@ -1,7 +1,7 @@
 <template lang="pug">
   .app-popup
     .app-popup-toggle(
-      v-bind:class="{'is-arrow-hidden': !showArrow}"
+      v-bind:class="{'is-toggle-hidden': !showToggle}"
       v-on:click="togglePopup"
     )
       slot
@@ -26,7 +26,7 @@
       position: {
         type: String
       },
-      showArrow: {
+      showToggle: {
         type: Boolean,
         'default': true
       }
@@ -72,7 +72,7 @@
       padding-right: 19px;
       cursor: pointer;
 
-      &.is-arrow-hidden {
+      &.is-toggle-hidden {
         padding-right: 0;
         .app-popup-arrow {
           display: none;
@@ -90,7 +90,7 @@
       height: 11px;
 
       svg {
-        fill: $color-font;
+        fill: currentColor;
         vertical-align: top;
       }
     }
@@ -100,7 +100,9 @@
       z-index: 1;
       top: 100%;
       left: 0;
+      overflow: hidden;
       margin-top: 2px;
+      color: $color-font;
 
       &.is-center {
         top: 50%;
@@ -113,6 +115,14 @@
         left: 0;
         margin-top: 0;
         margin-bottom: 2px;
+      }
+      &.is-bottom-center {
+        top: 100%;
+        bottom: auto;
+        left: 50%;
+        margin-top: 2px;
+        margin-bottom: 0;
+        transform: translateX(-50%) scale(1);
       }
       &.is-bottom-left {
         top: 100%;
