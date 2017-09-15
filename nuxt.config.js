@@ -21,6 +21,7 @@ module.exports = {
       { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/icons8-components/icons8-favicon.png' },
       { rel: 'icon', type: 'image/png', sizes: '96x96', href: '/icons8-components/icons8-favicon.png' },
       { rel: 'icon', type: 'image/png', sizes: '194x194', href: '/icons8-components/icons8-favicon.png' },
+      { rel: 'stylesheet', href: '//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.9.0/styles/atom-one-light.min.css' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Sanchez' }
     ]
   },
