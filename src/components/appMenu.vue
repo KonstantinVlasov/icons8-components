@@ -147,6 +147,7 @@
 
   .app-menu {
     position: relative;
+    z-index: 10;
     height: $menu-height;
     padding: 0 2rem;
     font-size: 1.125rem;
