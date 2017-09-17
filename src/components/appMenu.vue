@@ -282,9 +282,6 @@
         @media (max-width: $responsive-menu-medium) {
           display: none;
         }
-        @media (max-width: $responsive-menu-short) {
-          display: block;
-        }
       }
     }
 
