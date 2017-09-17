@@ -9,6 +9,7 @@
   @include font-regular;
   font-size: 12px;
   line-height: 1.5;
+  margin-top: -3px;
   color: white;
   cursor: pointer;
   text-decoration: none;
@@ -18,5 +19,6 @@
   &.is-big {
     font-size: 14px;
     padding: 1px 7px;
+    margin-top: -4px;
   }
 }
