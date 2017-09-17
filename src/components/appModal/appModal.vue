@@ -55,6 +55,7 @@
           if (typeof state === 'undefined') {
             state = !this.visible
           }
+          this.$emit('shown', params)
           this.toggle(state, params)
           if (params) {
             this.callback = params.callback
