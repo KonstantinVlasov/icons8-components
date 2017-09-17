@@ -2,7 +2,7 @@
   .color-picker
     app-popup(
       v-bind:position="position"
-      v-bind:show-arrow="false"
+      v-bind:show-toggle="false"
     )
       .color-picker-toggle(
         v-bind:data-tooltip="tooltip"
