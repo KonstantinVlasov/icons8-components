@@ -5,6 +5,7 @@
       name="login-modal"
       v-bind:width="360"
       v-bind:content-class="'login-form'"
+      v-on:shown="shown"
     )
       template(v-if="mode === 'login'")
         h3.title {{ loginTitle }}
@@ -16,7 +17,7 @@
             input(v-model="password" type="password" name="password" placeholder="password")
           .form-controls
             .button(
-              v-on:click="submit"
+              v-on:click="submit('login')"
               v-bind:class="{'is-loading': isLoading}"
             ) Login
         a.switch-mode(v-on:click="mode='register'") Register
@@ -33,7 +34,7 @@
             input(v-model="password" type="password" name="password" placeholder="password")
           .form-controls
             .button(
-              v-on:click="submit"
+              v-on:click="submit('register')"
               v-bind:class="{'is-loading': isLoading}"
             ) Create Account
         a.switch-mode(v-on:click="mode='login'") Login
@@ -60,17 +61,21 @@
         email: '',
         name: '',
         password: '',
-        mode: 'login',
-        isLoading: false
+        isLoading: false,
+        mode: undefined
       }
     },
     methods: {
       ...mapActions({
-        loginUser: 'loginUser'
+        loginUser: 'loginUser',
+        registerUser: 'registerUser'
       }),
-      submit () {
+      shown (params) {
+        this.mode = params.mode
+      },
+      submit (action) {
         this.isLoading = true
-        this.loginUser({
+        this[`${action}User`]({
           email: this.email,
           password: this.password
         })

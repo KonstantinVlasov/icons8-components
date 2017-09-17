@@ -46,41 +46,11 @@ const actions = (config) => {
           .catch(reject)
       })
     },
-    loginUser: function ({commit}, user) {
-      return new Promise(function (resolve, reject) {
-        const data = {
-          'RegisterForm[email]': user.email,
-          'RegisterForm[password]': user.password
-        }
-        axios
-          .request({
-            url: '/authAjax/login',
-            baseURL: config.backendUrl,
-            method: 'post',
-            withCredentials: true,
-            headers: {
-              'Content-Type': 'application/x-www-form-urlencoded',
-              'X-Requested-With': 'XMLHttpRequest'
-            },
-            transformRequest: function (obj) {
-              let str = []
-              Object.keys(obj).forEach(key => {
-                str.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
-              })
-              return str.join('&')
-            },
-            data
-          })
-          .then(response => {
-            if (response.data.success && response.data.auth) {
-              commit(USER_LOGGED_IN, response.data.auth)
-              resolve()
-            } else {
-              reject({message: 'Response error', response: response.data})
-            }
-          })
-          .catch(reject)
-      })
+    loginUser ({commit}, user) {
+      return authUser('login', commit, user)
+    },
+    registerUser ({commit}, user) {
+      return authUser('register', commit, user)
     },
     logoutUser ({commit}) {
       commit(USER_LOGGED_OUT)
@@ -95,10 +65,44 @@ const actions = (config) => {
           .then(resolve)
           .catch(reject)
       })
-    },
-    registerUser ({commit}, user) {
-      commit(USER_LOGGED_IN, user)
     }
+  }
+
+  function authUser (action, commit, user) {
+    return new Promise(function (resolve, reject) {
+      const data = {
+        'RegisterForm[email]': user.email,
+        'RegisterForm[password]': user.password
+      }
+      axios
+        .request({
+          url: `/authAjax/${action}`,
+          baseURL: config.backendUrl,
+          method: 'post',
+          withCredentials: true,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'X-Requested-With': 'XMLHttpRequest'
+          },
+          transformRequest: function (obj) {
+            let str = []
+            Object.keys(obj).forEach(key => {
+              str.push(encodeURIComponent(key) + '=' + encodeURIComponent(obj[key]))
+            })
+            return str.join('&')
+          },
+          data
+        })
+        .then(response => {
+          if (response.data.success && response.data.auth) {
+            commit(USER_LOGGED_IN, response.data.auth)
+            resolve()
+          } else {
+            reject({message: 'Response error', response: response.data})
+          }
+        })
+        .catch(reject)
+    })
   }
 }
 

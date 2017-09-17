@@ -135,7 +135,7 @@
         this.$modal.show('login-modal')
       },
       register () {
-        this.$modal.show('login-modal')
+        this.$modal.show('login-modal', {mode: 'register'})
       }
     }
   }
