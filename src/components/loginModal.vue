@@ -71,7 +71,7 @@
         registerUser: 'registerUser'
       }),
       shown (params) {
-        this.mode = params.mode
+        this.mode = params.mode || 'login'
       },
       submit (action) {
         this.isLoading = true
