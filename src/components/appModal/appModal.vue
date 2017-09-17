@@ -50,7 +50,7 @@
       }
     },
     created () {
-      modalPlugin.event.$on('toggle', (name, state, params) => {
+      modalPlugin.event.$on('toggle', (name, state, params = {}) => {
         if (name === this.name) {
           if (typeof state === 'undefined') {
             state = !this.visible

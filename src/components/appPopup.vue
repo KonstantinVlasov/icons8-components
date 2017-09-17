@@ -12,7 +12,7 @@
     transition(name="app-popup")
       .panel.app-popup-content(
         v-if="show"
-        v-bind:class="'is-'+position"
+        v-bind:class="style"
       )
         slot(name="content")
 </template>
@@ -26,6 +26,12 @@
       position: {
         type: String
       },
+      responsivePosition: {
+        type: String
+      },
+      responsiveWidth: {
+        type: Number
+      },
       showToggle: {
         type: Boolean,
         'default': true
@@ -35,6 +41,16 @@
       return {
         show: false,
         arrowDown
+      }
+    },
+    computed: {
+      style () {
+        let style = this.position
+        console.log('window.document.body.offsetWidth', window.document.body.offsetWidth)
+        if (this.responsiveWidth && window.document.body.offsetWidth <= this.responsiveWidth) {
+          style = this.responsivePosition
+        }
+        return 'is-' + style
       }
     },
     methods: {
