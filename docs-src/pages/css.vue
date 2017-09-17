@@ -3,6 +3,9 @@
     h2 CSS Components
 
     button-docs
+    badge-docs
+    list-docs
+    panel-docs
 </template>
 
 <script>
