@@ -35,7 +35,7 @@ const config = {
   },
   externals: {
     axios: 'axios',
-    vuex: 'Vuex'
+    vuex: 'vuex'
   },
   plugins: [
     new webpack.optimize.UglifyJsPlugin({
