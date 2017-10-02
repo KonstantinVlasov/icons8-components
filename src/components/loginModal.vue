@@ -10,14 +10,14 @@
       template(v-if="mode === 'login'")
         h3.title {{ loginTitle }}
         .description {{ description }}
-        form.is-big(v-on:submit.prevent="submit")
+        form.is-big(v-on:submit.prevent="submit('login')")
           .form-item
             input(v-model="email" name="email" placeholder="email")
           .form-item
             input(v-model="password" type="password" name="password" placeholder="password")
           .form-controls
-            .button(
-              v-on:click="submit('login')"
+            button.button(
+              type="submit"
               v-bind:class="{'is-loading': isLoading}"
             ) Login
         a.switch-mode(v-on:click="mode='register'") Register
@@ -25,7 +25,7 @@
       template(v-if="mode === 'register'")
         h3.title {{ registerTitle }}
         .description {{ description }}
-        form.is-big(v-on:submit.prevent="submit")
+        form.is-big(v-on:submit.prevent="submit('register')")
           .form-item
             input(v-model="email" name="email" placeholder="email")
           .form-item
@@ -33,8 +33,8 @@
           .form-item
             input(v-model="password" type="password" name="password" placeholder="password")
           .form-controls
-            .button(
-              v-on:click="submit('register')"
+            button.button(
+              type="submit"
               v-bind:class="{'is-loading': isLoading}"
             ) Create Account
         a.switch-mode(v-on:click="mode='login'") Login
