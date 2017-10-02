@@ -26,7 +26,9 @@ import nuxtLink from './src/components/nuxtLink.vue'
  */
 export default {
   install: function (Vue, {store, config}) {
-    store.registerModule('auth', authStore(config))
+    if (!store.state.auth) {
+      store.registerModule('auth', authStore(config))
+    }
 
     Vue.use(appModal)
     Vue.use(appNotify)
