@@ -32,13 +32,11 @@ body {
 
 a {
   text-decoration: none;
-  border-bottom: 1px solid rgba(156, 156, 156, 0.35);
   transition: border 0.3s ease;
   color: inherit;
   cursor: pointer;
 
   &:hover {
-    border-color: #9b9b9b;
     text-decoration: none;
   }
 
@@ -48,8 +46,15 @@ a {
       border-color: rgba(156, 156, 156, 0.35);
     }
   }
-  &.is-blue {
-    color: $color-blue;
+
+  &.is-pretty {
+    border-bottom: 1px solid rgba(156, 156, 156, 0.35);
+    &:hover {
+      border-color: #9b9b9b;
+    }
+    &.is-blue {
+      color: $color-blue;
+    }
   }
 }
 
