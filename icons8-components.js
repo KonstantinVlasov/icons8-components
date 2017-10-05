@@ -7,6 +7,8 @@ import appNotify from './src/components/appNotify'
 
 import ensureLogin from './src/plugins/ensureLogin'
 
+import icons8Components from './src/components/icons8Components.vue'
+
 import appMenu from './src/components/appMenu.vue'
 import appPopup from './src/components/appPopup.vue'
 import colorPicker from './src/components/colorPicker.vue'
@@ -34,6 +36,8 @@ export default {
     Vue.use(appNotify)
 
     Vue.use(ensureLogin)
+
+    Vue.component('icons8-components', icons8Components)
 
     Vue.component('app-menu', appMenu)
     Vue.component('app-popup', appPopup)

@@ -109,8 +109,6 @@
         template(v-if="user.isGuest")
           .item(v-on:click="login") Login
           .item(v-on:click="register") Register
-
-    login-modal
 </template>
 
 <script>
