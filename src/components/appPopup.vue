@@ -46,7 +46,6 @@
     computed: {
       style () {
         let style = this.position
-        console.log('window.document.body.offsetWidth', window.document.body.offsetWidth)
         if (this.responsiveWidth && window.document.body.offsetWidth <= this.responsiveWidth) {
           style = this.responsivePosition
         }
