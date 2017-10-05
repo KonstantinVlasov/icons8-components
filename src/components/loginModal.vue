@@ -106,6 +106,7 @@
 
       &>.title {
         color: #4a4a4a;
+        margin: 1.75rem 0;
       }
       &>.switch-mode {
         display: inline-block;
