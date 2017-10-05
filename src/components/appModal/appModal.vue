@@ -23,7 +23,9 @@
         required: true,
         type: [String, Number]
       },
-      contentClass: String,
+      contentClass: {
+        'default': ''
+      },
       width: {
         'default': false
       },
