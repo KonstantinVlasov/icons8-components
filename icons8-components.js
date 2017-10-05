@@ -6,6 +6,7 @@ import appModal from './src/components/appModal'
 import appNotify from './src/components/appNotify'
 
 import ensureLogin from './src/plugins/ensureLogin'
+import configPlugin from './src/plugins/config'
 
 import icons8Components from './src/components/icons8Components.vue'
 
@@ -28,6 +29,8 @@ import nuxtLink from './src/components/nuxtLink.vue'
  */
 export default {
   install: function (Vue, {store, config}) {
+    configPlugin.init(config)
+
     if (!store.state.auth) {
       store.registerModule('auth', authStore(config))
     }
