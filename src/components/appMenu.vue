@@ -14,9 +14,9 @@
 
     .app-menu-responsive(v-bind:class="{'is-active': show}")
       .app-menu-center
-        nuxt-link.app-menu-item(to="/icon") Icons
+        a.app-menu-item(to="https://icons8.com/icon") Icons
         a.app-menu-item.is-sounds(href="https://icons8.com/sounds") Sounds
-        a.app-menu-item.is-photos(href="/icons8-components/vue") Photos
+        a.app-menu-item.is-photos(href="https://icons8.com/photos") Photos
         .app-menu-item
           app-popup.app-menu-submenu(
             position="bottom-center"
@@ -161,7 +161,6 @@
       })
     },
     mounted () {
-      console.log('this.$slots', this.$slots)
       if (this.$slots.logo) {
         this.isSlotLogo = true
       }
