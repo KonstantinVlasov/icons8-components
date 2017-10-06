@@ -1,7 +1,9 @@
 <template lang="pug">
   .app-menu
     .app-menu-toggle(v-on:click="show = true" v-html="icons.menu")
-    a.app-menu-logo(href="https://icons8.com" v-html="logo || icons.logo")
+    a.app-menu-logo(v-if="!isSlotLogo" href="https://icons8.com" v-html="logo || icons.logo")
+    a.app-menu-logo(v-if="isSlotLogo" href="https://icons8.com")
+      slot(name="logo")
     a.app-menu-item.is-logo(href="https://icons8.com") Icons8
 
     transition(name="app-modal")
@@ -143,7 +145,8 @@
             en
           }
         },
-        show: false
+        show: false,
+        isSlotLogo: false
       }
     },
     computed: {
@@ -152,6 +155,10 @@
       })
     },
     mounted () {
+      console.log('this.$slots', this.$slots)
+      if (this.$slots.logo) {
+        this.isSlotLogo = true
+      }
       if (this.active) {
         this.$el.querySelector(`.app-menu-item.is-${this.active}`).classList.add('is-active')
       }
