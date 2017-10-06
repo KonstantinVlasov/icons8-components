@@ -271,7 +271,6 @@
       vertical-align: top;
       height: $menu-height;
       line-height: $menu-height - 0.5rem;
-      color: white;
       text-decoration: none;
       border-top: 0.25rem solid transparent;
       border-bottom: 0.25rem solid transparent;
