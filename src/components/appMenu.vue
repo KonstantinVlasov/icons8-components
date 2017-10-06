@@ -1,10 +1,10 @@
 <template lang="pug">
   .app-menu
     .app-menu-toggle(v-on:click="show = true" v-html="icons.menu")
-    a.app-menu-logo(v-if="!isSlotLogo" href="https://icons8.com" v-html="logo || icons.logo")
-    a.app-menu-logo(v-if="isSlotLogo" href="https://icons8.com")
+    a.app-menu-logo(v-if="!isSlotLogo" v-bind:href="logoUrl || 'https://icons8.com'" v-html="logo || icons.logo")
+    a.app-menu-logo(v-if="isSlotLogo" v-bind:href="logoUrl || 'https://icons8.com'")
       slot(name="logo")
-    a.app-menu-item.is-logo(href="https://icons8.com") Icons8
+    a.app-menu-item.is-logo(v-bind:href="logoUrl || 'https://icons8.com'") {{ logoText || 'Icons8' }}
 
     transition(name="app-modal")
       .app-menu-overlay(
@@ -130,6 +130,12 @@
       logo: {
         type: String
       },
+      logoUrl: {
+        type: String
+      },
+      logoText: {
+        type: String
+      },
       active: {
         type: String
       }
@@ -243,7 +249,7 @@
         left: 1rem;
 
         & /deep/ > svg {
-          fill: white;
+          fill: currentColor;
         }
       }
     }
@@ -252,6 +258,7 @@
       display: inline-block;
       width: $menu-height;
       height: $menu-height;
+      line-height: $menu-height;
       float: left;
 
       @media (max-width: $responsive-menu-short) {
@@ -388,7 +395,7 @@
       .app-menu-item {
         padding: 0 0.5rem;
         & > svg {
-          fill: white;
+          fill: currentColor;
           width: 1.25rem;
           vertical-align: sub;
         }
