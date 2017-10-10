@@ -97,8 +97,17 @@
         .app-menu-language
           .app-menu-item(
             v-on:click=""
-            v-html="icons.locale.en"
           )
+            app-popup(
+              position="bottom-right"
+              responsive-position="top"
+              v-bind:responsive-width="800"
+              v-bind:show-toggle="false"
+            )
+              .app-menu-language-icon(v-html="icons.locale.en")
+              div(slot="content")
+                .list
+                  .list-item(v-for="lang in languages") {{ lang.title }}
 
         template(v-if="!user.isGuest")
           a.app-menu-item(href="https://icons8.com/profile/summary") My Account
@@ -126,6 +135,7 @@
 
   export default {
     name: 'appMenu',
+    serverCacheKey: props => 'appMenu',
     props: {
       logo: {
         type: String
@@ -152,7 +162,49 @@
           }
         },
         show: false,
-        isSlotLogo: false
+        isSlotLogo: false,
+        languages: {
+          zh: {
+            title: 'Chinese',
+            code: 'zh-CN'
+          },
+          en: {
+            title: 'English',
+            code: 'en-US'
+          },
+          fr: {
+            title: 'French',
+            code: 'fr-FR'
+          },
+          de: {
+            title: 'German',
+            code: 'de-DE'
+          },
+          it: {
+            title: 'Italian',
+            code: 'it-IT'
+          },
+          ja: {
+            title: 'Japanese',
+            code: 'ja-JP'
+          },
+          pl: {
+            title: 'Polish',
+            code: 'pl-PL'
+          },
+          pt: {
+            title: 'Portuguese',
+            code: 'pt-BR'
+          },
+          ru: {
+            title: 'Russian',
+            code: 'ru-RU'
+          },
+          es: {
+            title: 'Spanish',
+            code: 'es-ES'
+          }
+        }
       }
     },
     computed: {
@@ -411,14 +463,21 @@
         float: none;
       }
       .app-menu-item {
-        padding: 0.375rem 0.5rem 0;
+        padding: 0 0.5rem;
+        @media (max-width: $responsive-menu-short) {
+          padding: 0 0.75rem;
+        }
+      }
+      .app-menu-language-icon {
+        padding-top: 0.375rem;
         & > svg {
           width: 30px;
           vertical-align: sub;
         }
-        @media (max-width: $responsive-menu-short) {
-          padding: 0 0.75rem;
-        }
+      }
+      .app-popup-content {
+        width: 110px;
+        margin-right: -0.5rem;
       }
     }
   }
