@@ -340,7 +340,7 @@
       }
 
       @media (max-width: $responsive-menu-medium) {
-        padding: 0 8px;
+        padding: 0 6px;
         font-size: 1rem;
       }
       @media (max-width: $responsive-menu-short) {
