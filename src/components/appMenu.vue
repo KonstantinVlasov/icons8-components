@@ -299,7 +299,7 @@
         top: 10px;
         left: 1rem;
 
-        & /deep/ > svg {
+        & > svg {
           fill: currentColor;
         }
       }
