@@ -31,6 +31,17 @@
         options.end(supportTouch ? event.changedTouches[0] || event.touches[0] : event)
       }
     }
+
+    let supportsPassive = false
+    try {
+      const opts = Object.defineProperty({}, 'passive', {
+        get: function () {
+          supportsPassive = true
+        }
+      })
+      window.addEventListener('test', null, opts)
+    } catch (e) {}
+
     element.addEventListener(supportTouch ? 'touchstart' : 'mousedown', function (event) {
       if (isDragging) return
       event.preventDefault()
@@ -44,11 +55,11 @@
       if (options.start) {
         options.start(supportTouch ? event.changedTouches[0] || event.touches[0] : event)
       }
-    })
+    }, supportTouch ? (supportsPassive ? { passive: true } : false) : false)
     if (supportTouch) {
-      element.addEventListener('touchmove', moveFn)
-      element.addEventListener('touchend', endFn)
-      element.addEventListener('touchcancel', endFn)
+      element.addEventListener('touchmove', moveFn, supportsPassive ? { passive: true } : false)
+      element.addEventListener('touchend', endFn, supportsPassive ? { passive: true } : false)
+      element.addEventListener('touchcancel', endFn, supportsPassive ? { passive: true } : false)
     }
   }
 
