@@ -325,7 +325,7 @@
 
     .app-menu-item {
       display: inline-block;
-      padding: 0 10px;
+      padding: 0 8px;
       vertical-align: top;
       height: $menu-height;
       line-height: $menu-height - 0.5rem;
@@ -444,7 +444,7 @@
       }
 
       .app-menu-item {
-        padding: 0 0.5rem;
+        padding: 0 6px;
         & > svg {
           fill: currentColor;
           width: 1.25rem;
@@ -463,7 +463,7 @@
         float: none;
       }
       .app-menu-item {
-        padding: 0 0.5rem;
+        padding: 0 6px;
         @media (max-width: $responsive-menu-short) {
           padding: 0 0.75rem;
         }
