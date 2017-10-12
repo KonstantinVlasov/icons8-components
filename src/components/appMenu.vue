@@ -14,15 +14,15 @@
 
     .app-menu-responsive(v-bind:class="{'is-active': show}")
       .app-menu-center
-        a.app-menu-item(to="https://icons8.com/icon") Icons
-        a.app-menu-item.is-sounds(href="https://icons8.com/sounds") Sounds
-        a.app-menu-item.is-photos(href="https://icons8.com/photos") Photos
+        a.app-menu-item(to="https://icons8.com/icon") {{ $t('MENU.ICONS', 'Icons') }}
+        a.app-menu-item.is-sounds(href="https://icons8.com/sounds") {{ $t('MENU.SOUNDS', 'Sounds') }}
+        a.app-menu-item.is-photos(href="https://icons8.com/photos") {{ $t('MENU.PHOTOS', 'Photos') }}
         .app-menu-item
           app-popup.app-menu-submenu(
             position="bottom-center"
             responsive-position="bottom-left"
             v-bind:responsive-width="800"
-          ) Download
+          ) {{ $t('MENU.DOWNLOAD', 'Download') }}
             div(slot="content")
               .ribbon All Free
               .app-menu-column
@@ -30,21 +30,21 @@
                   img.app-menu-image(src="../assets/images/icons8-96.png")
                   | Icons8 App
                   br
-                  small All our icons offline on your computer
+                  small {{ $t('MENU.APP_DESC', 'All our icons offline on your computer') }}
                 a.app-menu-submenu-item(href="https://icons8.com/lunacy")
                   img.app-menu-image(src="../assets/images/lunacy-96.png")
                   | Icons8 Lunacy
                   br
-                  small Sketch Viewer for Windows
+                  small {{ $t('MENU.LUNACY_DESC', 'Sketch Viewer for Windows') }}
 
-        a.app-menu-item(href="https://icons8.com/request-icon") Request
-        a.app-menu-item(href="https://icons8.com/paid-license-99") Buy
+        a.app-menu-item(href="https://icons8.com/request-icon") {{ $t('MENU.REQUEST', 'Request') }}
+        a.app-menu-item(href="https://icons8.com/paid-license-99") {{ $t('MENU.BUY', 'Buy') }}
         .app-menu-item
           app-popup.app-menu-submenu.is-wide(
             position="bottom-center"
             responsive-position="bottom-left"
             v-bind:responsive-width="800"
-          ) Labs
+          ) {{ $t('MENU.LABS', 'Labs') }}
             div(slot="content")
               .ribbon All Free
               .app-menu-column.is-half
@@ -52,45 +52,45 @@
                   img.app-menu-image(src="../assets/images/stoned-bat-96.png")
                   | omg-img
                   br
-                  small Search icons by writing URL
+                  small {{ $t('MENU.OMG_DESC', 'Search icons by writing URL') }}
                 a.app-menu-submenu-item(href="https://icons8.com/imessage")
                   img.app-menu-image(src="../assets/images/mongrol-96.png")
-                  | iMessage Stickers
+                  |  {{ $t('MENU.IMESSAGE', 'iMessage Stickers') }}
                   br
-                  small 3,900 flat color icons in your iMessages
+                  small {{ $t('MENU.IMESSAGE_DESC', '3,900 flat color icons in your iMessages') }}
                 a.app-menu-submenu-item(href="https://icons8.com/line-awesome")
                   img.app-menu-image(src="../assets/images/scout-knot-96.png")
                   | Line Awesome
                   br
-                  small Replace FontAwesome with modern line icons
+                  small {{ $t('MENU.LA_DESC', 'Replace FontAwesome with modern line icons') }}
                 a.app-menu-submenu-item(href="https://icons8.com/pedro")
                   img.app-menu-image(src="../assets/images/comet-96.png")
                   | Cosmic Pedro
                   br
-                  small Choose icon, add text, post to social media
+                  small {{ $t('MENU.PEDRO_DESC', 'Choose icon, add text, post to social media') }}
 
               .app-menu-column.is-half
                 a.app-menu-submenu-item(href="http://ai.icons8.com/Scribble/Search")
                   img.app-menu-image(src="../assets/images/autograph-96.png")
                   | Scribble AI
                   br
-                  small Search icons by drawing
+                  small {{ $t('MENU.SCRIBBLE_DESC', 'Search icons by drawing') }}
                 a.app-menu-submenu-item(href="https://www.iconpharm.com/")
                   img.app-menu-image(src="../assets/images/sheep-96.png")
                   | IconPharm
                   br
-                  small Icons8 technology for open source icons
+                  small {{ $t('MENU.ICONPHARM_DESC', 'Icons8 technology for open source icons') }}
                 a.app-menu-submenu-item(href="https://icons8.com/welovesvg")
                   img.app-menu-image(src="../assets/images/year-of-monkey-96.png")
                   | We Love SVG
                   br
-                  small Insert open source icons into your web apps
+                  small {{ $t('MENU.WE_LOVE_SVG_DESC', 'Insert open source icons into your web apps') }}
                 a.app-menu-submenu-item(href="https://github.com/icons8/impresser")
                   img.app-menu-image(src="../assets/images/robot-96.png")
                   | Impresser
                   br
-                  small As a front-end developer, I want HTML for bots
-        a.app-menu-item(href="https://icons8.com/blog") Blog
+                  small {{ $t('MENU.IMPRESSER_DESC', 'As a front-end developer, I want HTML for bots') }}
+        a.app-menu-item(href="https://icons8.com/blog") {{ $t('MENU.BLOG', 'Blog') }}
 
 
       .app-menu-profile
@@ -110,7 +110,7 @@
                   .list-item(v-for="lang in languages") {{ lang.title }}
 
         template(v-if="!user.isGuest")
-          a.app-menu-item(href="https://icons8.com/profile/summary") My Account
+          a.app-menu-item(href="https://icons8.com/profile/summary") {{ $t('MENU.MY_ACCOUNT', 'My Account') }}
           .app-menu-item(
             v-html="icons.notifications"
           )
@@ -119,8 +119,8 @@
             v-html="icons.logout"
           )
         template(v-if="user.isGuest")
-          .app-menu-item(v-on:click="login") Login
-          .app-menu-item(v-on:click="register") Register
+          .app-menu-item(v-on:click="login") {{ $t('MENU.LOGIN', 'Login') }}
+          .app-menu-item(v-on:click="register") {{ $t('MENU.REGISTER', 'Register') }}
 </template>
 
 <script>
