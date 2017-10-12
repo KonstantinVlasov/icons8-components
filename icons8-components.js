@@ -1,10 +1,12 @@
 'use strict'
 
 import authStore from './src/store/auth'
+import langStore from './src/store/lang'
 
 import appModal from './src/components/appModal'
 import appNotify from './src/components/appNotify'
 
+import i18nPlugin from './src/plugins/i18n'
 import ensureLogin from './src/plugins/ensureLogin'
 import configPlugin from './src/plugins/config'
 
@@ -34,11 +36,15 @@ export default {
     if (!store.state.auth) {
       store.registerModule('auth', authStore(config))
     }
+    if (!store.state.lang) {
+      store.registerModule('lang', langStore)
+    }
 
     Vue.use(appModal)
     Vue.use(appNotify)
 
     Vue.use(ensureLogin)
+    Vue.use(i18nPlugin, {store})
 
     Vue.component('icons8-components', icons8Components)
 
