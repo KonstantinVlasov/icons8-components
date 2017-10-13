@@ -92,11 +92,11 @@
                   small {{ $t('MENU.IMPRESSER_DESC', 'As a front-end developer, I want HTML for bots') }}
         a.app-menu-item(href="https://icons8.com/blog") {{ $t('MENU.BLOG', 'Blog') }}
 
-
       .app-menu-profile
         .app-menu-language
           .app-menu-item
             app-popup(
+              ref="langPopup"
               position="bottom-right"
               responsive-position="top"
               v-bind:responsive-width="800"
@@ -239,6 +239,7 @@
       selectLanguage (lang) {
         const loc = lang.host + location.pathname
         if (loc !== location.href) location.href = loc
+        this.$refs.langPopup.closePopup()
       }
     }
   }
