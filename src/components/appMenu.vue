@@ -358,10 +358,11 @@
 
     .app-menu-submenu {
       position: relative;
-      .app-popup-content {
+      .app-popup .app-popup-content {
         position: fixed;
         width: 400px;
         padding: 2rem 2rem 1rem;
+        margin-top: 0;
         text-align: left;
         color: black;
         line-height: 1.4;
