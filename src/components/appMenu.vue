@@ -95,9 +95,7 @@
 
       .app-menu-profile
         .app-menu-language
-          .app-menu-item(
-            v-on:click=""
-          )
+          .app-menu-item
             app-popup(
               position="bottom-right"
               responsive-position="top"
@@ -107,7 +105,7 @@
               .app-menu-language-icon(v-html="icons.locale.en")
               div(slot="content")
                 .list
-                  .list-item(v-for="lang in languages") {{ lang.title }}
+                  .list-item(v-on:click="selectLanguage(lang)" v-for="lang in languages") {{ lang.title }}
 
         template(v-if="!user.isGuest")
           a.app-menu-item(href="https://icons8.com/profile/summary") {{ $t('MENU.MY_ACCOUNT', 'My Account') }}
@@ -166,43 +164,53 @@
         languages: {
           zh: {
             title: 'Chinese',
-            code: 'zh-CN'
+            code: 'zh-CN',
+            host: 'https://icons8.cn'
           },
           en: {
             title: 'English',
-            code: 'en-US'
+            code: 'en-US',
+            host: 'https://icons8.com'
           },
           fr: {
             title: 'French',
-            code: 'fr-FR'
+            code: 'fr-FR',
+            host: 'https://icones8.fr'
           },
           de: {
             title: 'German',
-            code: 'de-DE'
+            code: 'de-DE',
+            host: 'https://icons8.de'
           },
           it: {
             title: 'Italian',
-            code: 'it-IT'
+            code: 'it-IT',
+            host: 'https://it.icons8.com'
           },
           ja: {
             title: 'Japanese',
-            code: 'ja-JP'
+            code: 'ja-JP',
+            host: 'https://icons8.jp'
           },
           pl: {
             title: 'Polish',
-            code: 'pl-PL'
+            code: 'pl-PL',
+            host: 'https://pl.icons8.com'
           },
           pt: {
             title: 'Portuguese',
-            code: 'pt-BR'
+            code: 'pt-BR',
+            host: 'https://pt.icons8.com'
           },
           ru: {
             title: 'Russian',
-            code: 'ru-RU'
+            code: 'ru-RU',
+            host: 'https://icons8.ru'
           },
           es: {
             title: 'Spanish',
-            code: 'es-ES'
+            code: 'es-ES',
+            host: 'https://iconos8.es'
           }
         }
       }
@@ -227,6 +235,10 @@
       },
       register () {
         this.$modal.show('login-modal', {mode: 'register'})
+      },
+      selectLanguage (lang) {
+        const loc = lang.host + location.pathname
+        if (loc !== location.href) location.href = loc
       }
     }
   }
