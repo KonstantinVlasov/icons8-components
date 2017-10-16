@@ -102,7 +102,8 @@
               v-bind:responsive-width="800"
               v-bind:show-toggle="false"
             )
-              .app-menu-language-icon(v-html="icons.locale.en")
+              .app-menu-language-icon
+                img(v-bind:src="langInfo.icon")
               div(slot="content")
                 .list
                   .list-item(v-on:click="selectLanguage(lang)" v-for="lang in languages") {{ lang.title }}
@@ -126,8 +127,6 @@
   import logout from '../assets/svg/logout.svg'
   import notifications from '../assets/svg/notifications.svg'
   import menu from '../assets/svg/menu.svg'
-
-  import en from '../assets/svg/locale/en/us.svg'
 
   import { mapState, mapActions } from 'vuex'
 
@@ -154,71 +153,82 @@
           logo,
           logout,
           notifications,
-          menu,
-          locale: {
-            en
-          }
+          menu
         },
         show: false,
         isSlotLogo: false,
         languages: {
-          zh: {
+          'zh-CN': {
             title: 'Chinese',
             code: 'zh-CN',
-            host: 'https://icons8.cn'
+            host: 'https://icons8.cn',
+            icon: require('../assets/icons/locale/zh-CN.png')
           },
-          en: {
+          'en-US': {
             title: 'English',
             code: 'en-US',
-            host: 'https://icons8.com'
+            host: 'https://icons8.com',
+            icon: require('../assets/icons/locale/en-US.png')
           },
-          fr: {
+          'fr-FR': {
             title: 'French',
             code: 'fr-FR',
-            host: 'https://icones8.fr'
+            host: 'https://icones8.fr',
+            icon: require('../assets/icons/locale/fr-FR.png')
           },
-          de: {
+          'de-DE': {
             title: 'German',
             code: 'de-DE',
-            host: 'https://icons8.de'
+            host: 'https://icons8.de',
+            icon: require('../assets/icons/locale/de-DE.png')
           },
-          it: {
+          'it-IT': {
             title: 'Italian',
             code: 'it-IT',
-            host: 'https://it.icons8.com'
+            host: 'https://it.icons8.com',
+            icon: require('../assets/icons/locale/it-IT.png')
           },
-          ja: {
+          'ja-JP': {
             title: 'Japanese',
             code: 'ja-JP',
-            host: 'https://icons8.jp'
+            host: 'https://icons8.jp',
+            icon: require('../assets/icons/locale/ja-JP.png')
           },
-          pl: {
+          'pl-PL': {
             title: 'Polish',
             code: 'pl-PL',
-            host: 'https://pl.icons8.com'
+            host: 'https://pl.icons8.com',
+            icon: require('../assets/icons/locale/pl-PL.png')
           },
-          pt: {
+          'pt-BR': {
             title: 'Portuguese',
             code: 'pt-BR',
-            host: 'https://pt.icons8.com'
+            host: 'https://pt.icons8.com',
+            icon: require('../assets/icons/locale/pt-BR.png')
           },
-          ru: {
+          'ru-RU': {
             title: 'Russian',
             code: 'ru-RU',
-            host: 'https://icons8.ru'
+            host: 'https://icons8.ru',
+            icon: require('../assets/icons/locale/ru-RU.png')
           },
-          es: {
+          'es-ES': {
             title: 'Spanish',
             code: 'es-ES',
-            host: 'https://iconos8.es'
+            host: 'https://iconos8.es',
+            icon: require('../assets/icons/locale/es-ES.png')
           }
         }
       }
     },
     computed: {
       ...mapState({
-        user: state => state.auth.user
-      })
+        user: state => state.auth.user,
+        lang: state => state.lang.locale
+      }),
+      langInfo () {
+        return this.languages[this.lang]
+      }
     },
     mounted () {
       if (this.$slots.logo) {
@@ -371,7 +381,7 @@
 
     .app-menu-submenu {
       position: relative;
-      .app-popup .app-popup-content {
+      &.app-popup .app-popup-content {
         position: fixed;
         width: 400px;
         padding: 2rem 2rem 1rem;
@@ -484,7 +494,7 @@
       }
       .app-menu-language-icon {
         padding-top: 0.375rem;
-        & > svg {
+        & > img {
           width: 30px;
           vertical-align: sub;
         }

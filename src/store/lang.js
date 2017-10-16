@@ -19,18 +19,13 @@ const state = {
     'ru-RU',
     'zh-CN'
   ],
-  locale: undefined,
-  lang: undefined, // current lang
+  locale: 'en-US', // current locale
   translation: undefined // store for translations
 }
 
 const mutations = {
   SET_LOCALE (state, locale) {
     state.locale = locale
-    state.lang = ('' + locale).substring(0, 2)
-  },
-  SET_LANG (state, lang) {
-    state.lang = lang
   },
   SET_TRANSLATION (state, translation) {
     state.translation = translation
