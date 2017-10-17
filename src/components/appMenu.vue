@@ -103,7 +103,7 @@
               v-bind:show-toggle="false"
             )
               .app-menu-language-icon
-                img(v-bind:src="flag")
+                img(v-bind:src="flags[locale]")
               div(slot="content")
                 .list
                   .list-item(
@@ -111,7 +111,7 @@
                     v-for="lang in locales"
                   ) {{ lang.name }}
 
-        template(v-if="!user.isGuest")
+        template(v-if="!isGuest")
           a.app-menu-item(href="https://icons8.com/profile/summary") {{ $t('MENU.MY_ACCOUNT', 'My Account') }}
           .app-menu-item(
             v-html="icons.notifications"
@@ -120,7 +120,7 @@
             v-on:click="logoutUser"
             v-html="icons.logout"
           )
-        template(v-if="user.isGuest")
+        template(v-if="isGuest")
           .app-menu-item(v-on:click="login") {{ $t('MENU.LOGIN', 'Login') }}
           .app-menu-item(v-on:click="register") {{ $t('MENU.REGISTER', 'Register') }}
 </template>
@@ -135,7 +135,7 @@
 
   export default {
     name: 'appMenu',
-    serverCacheKey: props => props => JSON.stringify(props),
+    serverCacheKey: props => JSON.stringify(props),
     props: {
       baseUrl: {
         type: String,
@@ -226,11 +226,8 @@
     },
     computed: {
       ...mapState({
-        user: state => state.auth.user
-      }),
-      flag () {
-        return this.flags[this.locale]
-      }
+        isGuest: state => state.auth.user.isGuest
+      })
     },
     mounted () {
       if (this.$slots.logo) {
