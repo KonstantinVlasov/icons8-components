@@ -103,10 +103,10 @@
               v-bind:show-toggle="false"
             )
               .app-menu-language-icon
-                img(v-bind:src="langInfo.icon")
+                img(v-bind:src="flag")
               div(slot="content")
                 .list
-                  .list-item(v-on:click="selectLanguage(lang)" v-for="lang in languages") {{ lang.title }}
+                  .list-item(v-on:click="selectLanguage(lang)" v-for="lang in locales") {{ lang.title }}
 
         template(v-if="!user.isGuest")
           a.app-menu-item(href="https://icons8.com/profile/summary") {{ $t('MENU.MY_ACCOUNT', 'My Account') }}
@@ -156,6 +156,46 @@
       },
       active: {
         type: String
+      },
+      locale: {
+        type: String,
+        'default': 'en-US'
+      },
+      locales: {
+        type: Array,
+        'default': () => {
+          return [{
+            title: 'Chinese',
+            url: 'https://icons8.cn'
+          }, {
+            title: 'English',
+            url: 'https://icons8.com'
+          }, {
+            title: 'French',
+            url: 'https://icones8.fr'
+          }, {
+            title: 'German',
+            url: 'https://icons8.de'
+          }, {
+            title: 'Italian',
+            url: 'https://it.icons8.com'
+          }, {
+            title: 'Japanese',
+            url: 'https://icons8.jp'
+          }, {
+            title: 'Polish',
+            url: 'https://pl.icons8.com'
+          }, {
+            title: 'Portuguese',
+            url: 'https://pt.icons8.com'
+          }, {
+            title: 'Russian',
+            url: 'https://icons8.ru'
+          }, {
+            title: 'Spanish',
+            url: 'https://iconos8.es'
+          }]
+        }
       }
     },
     data () {
@@ -167,77 +207,26 @@
         },
         show: false,
         isSlotLogo: false,
-        languages: {
-          'zh-CN': {
-            title: 'Chinese',
-            code: 'zh-CN',
-            host: 'https://icons8.cn',
-            icon: require('../assets/icons/locale/zh-CN.png')
-          },
-          'en-US': {
-            title: 'English',
-            code: 'en-US',
-            host: 'https://icons8.com',
-            icon: require('../assets/icons/locale/en-US.png')
-          },
-          'fr-FR': {
-            title: 'French',
-            code: 'fr-FR',
-            host: 'https://icones8.fr',
-            icon: require('../assets/icons/locale/fr-FR.png')
-          },
-          'de-DE': {
-            title: 'German',
-            code: 'de-DE',
-            host: 'https://icons8.de',
-            icon: require('../assets/icons/locale/de-DE.png')
-          },
-          'it-IT': {
-            title: 'Italian',
-            code: 'it-IT',
-            host: 'https://it.icons8.com',
-            icon: require('../assets/icons/locale/it-IT.png')
-          },
-          'ja-JP': {
-            title: 'Japanese',
-            code: 'ja-JP',
-            host: 'https://icons8.jp',
-            icon: require('../assets/icons/locale/ja-JP.png')
-          },
-          'pl-PL': {
-            title: 'Polish',
-            code: 'pl-PL',
-            host: 'https://pl.icons8.com',
-            icon: require('../assets/icons/locale/pl-PL.png')
-          },
-          'pt-BR': {
-            title: 'Portuguese',
-            code: 'pt-BR',
-            host: 'https://pt.icons8.com',
-            icon: require('../assets/icons/locale/pt-BR.png')
-          },
-          'ru-RU': {
-            title: 'Russian',
-            code: 'ru-RU',
-            host: 'https://icons8.ru',
-            icon: require('../assets/icons/locale/ru-RU.png')
-          },
-          'es-ES': {
-            title: 'Spanish',
-            code: 'es-ES',
-            host: 'https://iconos8.es',
-            icon: require('../assets/icons/locale/es-ES.png')
-          }
+        flags: {
+          'zh-CN': require('../assets/icons/locale/zh-CN.png'),
+          'en-US': require('../assets/icons/locale/en-US.png'),
+          'fr-FR': require('../assets/icons/locale/fr-FR.png'),
+          'de-DE': require('../assets/icons/locale/de-DE.png'),
+          'it-IT': require('../assets/icons/locale/it-IT.png'),
+          'ja-JP': require('../assets/icons/locale/ja-JP.png'),
+          'pl-PL': require('../assets/icons/locale/pl-PL.png'),
+          'pt-BR': require('../assets/icons/locale/pt-BR.png'),
+          'ru-RU': require('../assets/icons/locale/ru-RU.png'),
+          'es-ES': require('../assets/icons/locale/es-ES.png')
         }
       }
     },
     computed: {
       ...mapState({
-        user: state => state.auth.user,
-        lang: state => state.lang.locale
+        user: state => state.auth.user
       }),
-      langInfo () {
-        return this.languages[this.lang]
+      flag () {
+        return this.flags[this.locale]
       }
     },
     mounted () {
@@ -257,7 +246,7 @@
         this.$modal.show('login-modal', {mode: 'register'})
       },
       selectLanguage (lang) {
-        const loc = lang.host + location.pathname
+        const loc = lang.url + location.pathname
         if (loc !== location.href) location.href = loc
         this.$refs.langPopup.closePopup()
       }
