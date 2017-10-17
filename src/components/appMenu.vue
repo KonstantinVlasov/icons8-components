@@ -106,7 +106,10 @@
                 img(v-bind:src="flag")
               div(slot="content")
                 .list
-                  .list-item(v-on:click="selectLanguage(lang)" v-for="lang in locales") {{ lang.title }}
+                  .list-item(
+                    v-on:click="selectLanguage(lang)"
+                    v-for="lang in locales"
+                  ) {{ lang.name }}
 
         template(v-if="!user.isGuest")
           a.app-menu-item(href="https://icons8.com/profile/summary") {{ $t('MENU.MY_ACCOUNT', 'My Account') }}
@@ -165,34 +168,34 @@
         type: Array,
         'default': () => {
           return [{
-            title: 'Chinese',
+            name: 'Chinese',
             url: 'https://icons8.cn'
           }, {
-            title: 'English',
+            name: 'English',
             url: 'https://icons8.com'
           }, {
-            title: 'French',
+            name: 'French',
             url: 'https://icones8.fr'
           }, {
-            title: 'German',
+            name: 'German',
             url: 'https://icons8.de'
           }, {
-            title: 'Italian',
+            name: 'Italian',
             url: 'https://it.icons8.com'
           }, {
-            title: 'Japanese',
+            name: 'Japanese',
             url: 'https://icons8.jp'
           }, {
-            title: 'Polish',
+            name: 'Polish',
             url: 'https://pl.icons8.com'
           }, {
-            title: 'Portuguese',
+            name: 'Portuguese',
             url: 'https://pt.icons8.com'
           }, {
-            title: 'Russian',
+            name: 'Russian',
             url: 'https://icons8.ru'
           }, {
-            title: 'Spanish',
+            name: 'Spanish',
             url: 'https://iconos8.es'
           }]
         }
