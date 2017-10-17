@@ -1,10 +1,10 @@
 <template lang="pug">
   .app-menu
     .app-menu-toggle(v-on:click="show = true" v-html="icons.menu")
-    a.app-menu-logo(v-if="!isSlotLogo" v-bind:href="logoUrl || 'https://icons8.com'" v-html="logo || icons.logo")
-    a.app-menu-logo(v-if="isSlotLogo" v-bind:href="logoUrl || 'https://icons8.com'")
+    a.app-menu-logo(v-if="!isSlotLogo" v-bind:href="logoUrl" v-html="logo")
+    a.app-menu-logo(v-if="isSlotLogo" v-bind:href="logoUrl")
       slot(name="logo")
-    a.app-menu-item.is-logo(v-bind:href="logoUrl || 'https://icons8.com'") {{ logoText || 'Icons8' }}
+    a.app-menu-item.is-logo(v-bind:href="logoUrl") {{ logoText }}
 
     transition(name="app-modal")
       .app-menu-overlay(
@@ -14,9 +14,9 @@
 
     .app-menu-responsive(v-bind:class="{'is-active': show}")
       .app-menu-center
-        a.app-menu-item(to="https://icons8.com/icon") {{ $t('MENU.ICONS', 'Icons') }}
-        a.app-menu-item.is-sounds(href="https://icons8.com/sounds") {{ $t('MENU.SOUNDS', 'Sounds') }}
-        a.app-menu-item.is-photos(href="https://icons8.com/photos") {{ $t('MENU.PHOTOS', 'Photos') }}
+        a.app-menu-item(v-bind:href="baseUrl + '/icon'") {{ $t('MENU.ICONS', 'Icons') }}
+        a.app-menu-item.is-sounds(v-bind:href="baseUrl + '/sounds'") {{ $t('MENU.SOUNDS', 'Sounds') }}
+        a.app-menu-item.is-photos(v-bind:href="baseUrl + '/photos'") {{ $t('MENU.PHOTOS', 'Photos') }}
         .app-menu-item
           app-popup.app-menu-submenu(
             position="bottom-center"
@@ -26,19 +26,19 @@
             div(slot="content")
               .ribbon All Free
               .app-menu-column
-                a.app-menu-submenu-item(href="https://icons8.com/app")
+                a.app-menu-submenu-item(v-bind:href="baseUrl + '/app'")
                   img.app-menu-image(src="../assets/images/icons8-96.png")
                   | Icons8 App
                   br
                   small {{ $t('MENU.APP_DESC', 'All our icons offline on your computer') }}
-                a.app-menu-submenu-item(href="https://icons8.com/lunacy")
+                a.app-menu-submenu-item(v-bind:href="baseUrl + '/lunacy'")
                   img.app-menu-image(src="../assets/images/lunacy-96.png")
                   | Icons8 Lunacy
                   br
                   small {{ $t('MENU.LUNACY_DESC', 'Sketch Viewer for Windows') }}
 
-        a.app-menu-item(href="https://icons8.com/request-icon") {{ $t('MENU.REQUEST', 'Request') }}
-        a.app-menu-item(href="https://icons8.com/paid-license-99") {{ $t('MENU.BUY', 'Buy') }}
+        a.app-menu-item(v-bind:href="baseUrl + '/request-icon'") {{ $t('MENU.REQUEST', 'Request') }}
+        a.app-menu-item(v-bind:href="baseUrl + '/paid-license-99'") {{ $t('MENU.BUY', 'Buy') }}
         .app-menu-item
           app-popup.app-menu-submenu.is-wide(
             position="bottom-center"
@@ -53,17 +53,17 @@
                   | omg-img
                   br
                   small {{ $t('MENU.OMG_DESC', 'Search icons by writing URL') }}
-                a.app-menu-submenu-item(href="https://icons8.com/imessage")
+                a.app-menu-submenu-item(v-bind:href="baseUrl + '/imessage'")
                   img.app-menu-image(src="../assets/images/mongrol-96.png")
                   |  {{ $t('MENU.IMESSAGE', 'iMessage Stickers') }}
                   br
                   small {{ $t('MENU.IMESSAGE_DESC', '3,900 flat color icons in your iMessages') }}
-                a.app-menu-submenu-item(href="https://icons8.com/line-awesome")
+                a.app-menu-submenu-item(v-bind:href="baseUrl + '/line-awesome'")
                   img.app-menu-image(src="../assets/images/scout-knot-96.png")
                   | Line Awesome
                   br
                   small {{ $t('MENU.LA_DESC', 'Replace FontAwesome with modern line icons') }}
-                a.app-menu-submenu-item(href="https://icons8.com/pedro")
+                a.app-menu-submenu-item(v-bind:href="baseUrl + '/pedro'")
                   img.app-menu-image(src="../assets/images/comet-96.png")
                   | Cosmic Pedro
                   br
@@ -80,7 +80,7 @@
                   | IconPharm
                   br
                   small {{ $t('MENU.ICONPHARM_DESC', 'Icons8 technology for open source icons') }}
-                a.app-menu-submenu-item(href="https://icons8.com/welovesvg")
+                a.app-menu-submenu-item(v-bind:href="baseUrl + '/welovesvg'")
                   img.app-menu-image(src="../assets/images/year-of-monkey-96.png")
                   | We Love SVG
                   br
@@ -90,7 +90,7 @@
                   | Impresser
                   br
                   small {{ $t('MENU.IMPRESSER_DESC', 'As a front-end developer, I want HTML for bots') }}
-        a.app-menu-item(href="https://icons8.com/blog") {{ $t('MENU.BLOG', 'Blog') }}
+        a.app-menu-item(v-bind:href="blogUrl") {{ $t('MENU.BLOG', 'Blog') }}
 
       .app-menu-profile
         .app-menu-language
@@ -132,16 +132,27 @@
 
   export default {
     name: 'appMenu',
-    serverCacheKey: props => 'appMenu',
+    serverCacheKey: props => props => JSON.stringify(props),
     props: {
+      baseUrl: {
+        type: String,
+        'default': 'https://icons8.com'
+      },
+      blogUrl: {
+        type: String,
+        'default': 'https//icons8.com/blog'
+      },
       logo: {
-        type: String
+        type: String,
+        'default': logo
       },
       logoUrl: {
-        type: String
+        type: String,
+        'default': 'https://icons8.com'
       },
       logoText: {
-        type: String
+        type: String,
+        'default': 'Icons8'
       },
       active: {
         type: String
@@ -150,7 +161,6 @@
     data () {
       return {
         icons: {
-          logo,
           logout,
           notifications,
           menu
