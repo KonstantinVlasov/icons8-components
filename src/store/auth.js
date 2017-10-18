@@ -57,7 +57,7 @@ const actions = (config) => {
       return new Promise(function (resolve, reject) {
         axios
           .request({
-            url: '/logout',
+            url: '/authAjax/logout',
             baseURL: config.backendUrl,
             method: 'get',
             withCredentials: true
@@ -98,7 +98,7 @@ const actions = (config) => {
             commit(USER_LOGGED_IN, response.data.auth)
             resolve()
           } else {
-            reject({message: 'Response error', response: response.data})
+            reject({message: response.data || 'Something went wrong', response: response.data})
           }
         })
         .catch(reject)
