@@ -143,7 +143,7 @@
       },
       blogUrl: {
         type: String,
-        'default': 'https//icons8.com/blog'
+        'default': 'https://icons8.com/blog'
       },
       logo: {
         type: String,
