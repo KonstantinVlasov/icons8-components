@@ -55,9 +55,11 @@
     methods: {
       togglePopup () {
         this.show = !this.show
+        this.$emit(this.show ? 'open' : 'close')
       },
       closePopup () {
         this.show = false
+        this.$emit('close')
       },
       outsideClick (e) {
         if (!this.$el.contains(e.target)) {

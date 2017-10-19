@@ -3,6 +3,8 @@
     app-popup(
       v-bind:position="position"
       v-bind:show-toggle="false"
+      v-on:open="onOpen"
+      v-on:close="onClose"
     )
       .color-picker-toggle(
         v-bind:data-tooltip="tooltip"
@@ -110,6 +112,12 @@
     methods: {
       chooseColor (color) {
         this.computedColor = color
+      },
+      onOpen () {
+        this.$emit('open')
+      },
+      onClose () {
+        this.$emit('close')
       }
     }
   }
