@@ -10,8 +10,16 @@
 
   export default {
     name: 'Icons8Components',
+    props: {
+      loadUser: {
+        type: Boolean,
+        'default': false
+      }
+    },
     mounted () {
-      this.fillUserInfo()
+      if (this.loadUser) {
+        this.fillUserInfo()
+      }
     },
     methods: {
       ...mapActions(['fillUserInfo'])
