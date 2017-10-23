@@ -112,10 +112,8 @@
                   ) {{ lang.name }}
 
         template(v-if="!isGuest")
-          a.app-menu-item(href="https://icons8.com/profile/summary") {{ $t('MENU.MY_ACCOUNT', 'My Account') }}
-          .app-menu-item(
-            v-html="icons.notifications"
-          )
+          a.app-menu-item(v-bind:href="baseUrl + '/profile/summary'") {{ $t('MENU.MY_ACCOUNT', 'My Account') }}
+          //.app-menu-item(v-html="icons.notifications")
           .app-menu-item(
             v-on:click="logoutUser"
             v-html="icons.logout"
