@@ -345,7 +345,7 @@
 
     .app-menu-item {
       display: inline-block;
-      padding: 0 8px;
+      padding: 0 12px;
       vertical-align: top;
       height: $menu-height;
       line-height: $menu-height - 0.5rem;
@@ -359,6 +359,9 @@
         border-bottom: 0.25rem solid rgba(0, 0, 0, 0.15);
       }
 
+      @media (max-width: $responsive-menu-wide) {
+        padding: 0 8px;
+      }
       @media (max-width: $responsive-menu-medium) {
         padding: 0 6px;
         font-size: 1rem;
@@ -465,11 +468,14 @@
       }
 
       .app-menu-item {
-        padding: 0 6px;
+        padding: 0 8px;
         & > svg {
           fill: currentColor;
           width: 1.25rem;
           vertical-align: sub;
+        }
+        @media (max-width: $responsive-menu-medium) {
+          padding: 0 6px;
         }
         @media (max-width: $responsive-menu-short) {
           padding: 0 0.75rem;
