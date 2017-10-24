@@ -16,7 +16,7 @@
       .app-menu-center
         a.app-menu-item(v-bind:href="baseUrl + '/icon'") {{ $t('MENU.ICONS', 'Icons') }}
         a.app-menu-item.is-sounds(v-bind:href="baseUrl + '/sounds'") {{ $t('MENU.SOUNDS', 'Sounds') }}
-        a.app-menu-item.is-photos(v-bind:href="baseUrl + '/photos'") {{ $t('MENU.PHOTOS', 'Photos') }}
+        // a.app-menu-item.is-photos(v-bind:href="baseUrl + '/photos'") {{ $t('MENU.PHOTOS', 'Photos') }}
         .app-menu-item
           app-popup.app-menu-submenu(
             position="bottom-center"
