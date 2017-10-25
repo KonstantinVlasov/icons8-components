@@ -232,7 +232,10 @@
         this.isSlotLogo = true
       }
       if (this.active) {
-        this.$el.querySelector(`.app-menu-item.is-${this.active}`).classList.add('is-active')
+        const menuItem = this.$el.querySelector(`.app-menu-item.is-${this.active}`)
+        if (menuItem) {
+          menuItem.classList.add('is-active')
+        }
       }
     },
     methods: {
