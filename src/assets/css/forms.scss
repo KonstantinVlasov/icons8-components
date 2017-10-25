@@ -16,6 +16,9 @@ input, select {
   &:focus {
     border-color: $color-blue;
   }
+  &.is-invalid {
+    border: 1px solid $color-red;
+  }
 }
 textarea {
   line-height: 1.5rem;
