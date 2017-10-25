@@ -6,8 +6,8 @@
         v-bind:key="notify.id"
         v-bind:class="notify.type"
       )
-        .title(v-if="notify.title" v-html="notify.title")
-        .content(v-html="notify.text")
+        .notify-title(v-if="notify.title" v-html="notify.title")
+        div(v-html="notify.text")
 </template>
 
 <script>
