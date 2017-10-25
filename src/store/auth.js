@@ -98,7 +98,7 @@ const actions = (config) => {
             commit(USER_LOGGED_IN, response.data.auth)
             resolve()
           } else {
-            reject({message: response.data || 'Something went wrong', response: response.data})
+            reject({message: response.data.message || 'Something went wrong', response: response.data})
           }
         })
         .catch(reject)

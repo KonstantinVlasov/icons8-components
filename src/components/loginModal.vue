@@ -8,36 +8,36 @@
       v-on:shown="shown"
     )
       template(v-if="mode === 'login'")
-        h3.title {{ loginTitle }}
+        h3.title {{ loginTitleText }}
         .description {{ description }}
         form.is-big(v-on:submit.prevent="submit('login')")
           .form-item
-            input(v-model="email" name="email" placeholder="email")
+            input(v-model="email" name="email" placeholder="email" v-bind:class="emailClasses")
           .form-item
-            input(v-model="password" type="password" name="password" placeholder="password")
+            input(v-model="password" type="password" name="password" placeholder="password" v-bind:class="passwordClasses")
           .form-controls
             button.button(
               type="submit"
               v-bind:class="{'is-loading': isLoading}"
-            ) Login
-        a.switch-mode(v-on:click="mode='register'") Register
+            ) {{ $t('WEB_APP.REGISTER_MODAL.LOGIN', 'Login') }}
+        a.switch-mode(v-on:click="mode='register'") {{ $t('WEB_APP.REGISTER_MODAL.REGISTER', 'Register') }}
 
       template(v-if="mode === 'register'")
-        h3.title {{ registerTitle }}
+        h3.title {{ registerTitleText }}
         .description {{ description }}
         form.is-big(v-on:submit.prevent="submit('register')")
           .form-item
-            input(v-model="email" name="email" placeholder="email")
+            input(v-model="email" name="email" placeholder="email" v-bind:class="emailClasses")
           .form-item
             input(v-model="name" name="name" placeholder="name")
           .form-item
-            input(v-model="password" type="password" name="password" placeholder="password")
+            input(v-model="password" type="password" name="password" placeholder="password" v-bind:class="passwordClasses")
           .form-controls
             button.button(
               type="submit"
               v-bind:class="{'is-loading': isLoading}"
-            ) Create Account
-        a.switch-mode(v-on:click="mode='login'") Login
+            ) {{ $t('WEB_APP.REGISTER_MODAL.CREATE_ACCOUNT', 'Create Account') }}
+        a.switch-mode(v-on:click="mode='login'") {{ $t('WEB_APP.REGISTER_MODAL.LOGIN', 'Login') }}
 </template>
 
 <script>
@@ -46,15 +46,9 @@
   export default {
     name: 'loginModal',
     props: {
-      registerTitle: {
-        'default': 'Register'
-      },
-      loginTitle: {
-        'default': 'Login'
-      },
-      description: {
-        'default': ''
-      }
+      registerTitle: String,
+      loginTitle: String,
+      description: String
     },
     data () {
       return {
@@ -62,7 +56,26 @@
         name: '',
         password: '',
         isLoading: false,
-        mode: undefined
+        mode: undefined,
+        errors: {password: false, email: false}
+      }
+    },
+    computed: {
+      registerTitleText () {
+        return this.registerTitle || this.$t('WEB_APP.REGISTER_MODAL.REGISTER', 'Register')
+      },
+      loginTitleText () {
+        return this.loginTitle || this.$t('WEB_APP.REGISTER_MODAL.LOGIN', 'Login')
+      },
+      emailClasses () {
+        return {
+          'is-invalid': this.errors.email
+        }
+      },
+      passwordClasses () {
+        return {
+          'is-invalid': this.errors.password
+        }
       }
     },
     methods: {
@@ -89,6 +102,19 @@
           .catch(error => {
             this.isLoading = false
             console.log('login error', error)
+            if (error.response && error.response.errors) {
+              this.errors.email = error.response.errors.email
+              this.errors.password = error.response.errors.password
+              this.$error({
+                title: this.$t(`${action} failed`),
+                text: (this.errors.email || this.errors.password)[0]
+              })
+            } else {
+              this.$error({
+                title: this.$t(`${action} failed`),
+                text: error.message
+              })
+            }
           })
       }
     }
