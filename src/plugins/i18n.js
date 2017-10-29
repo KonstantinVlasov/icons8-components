@@ -1,11 +1,11 @@
 'use strict'
 
 const i18nPlugin = {
-  install (Vue, {store}) {
+  install (Vue) {
     const $t = function (key, props, defaultString) {
       key = '' + key
       let keys = key.split('.')
-      let value = store.state.lang.translation
+      let value = this.$store.state.lang.translation
       keys.some((k) => {
         if (value) {
           value = value[k]
