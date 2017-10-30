@@ -6,7 +6,7 @@ import langStore from './src/store/lang'
 import appModal from './src/components/appModal'
 import appNotify from './src/components/appNotify'
 
-import i18nPlugin from './src/plugins/i18n'
+import createI18nPlugin from './src/plugins/i18n'
 import ensureLogin from './src/plugins/ensureLogin'
 import configPlugin from './src/plugins/config'
 
@@ -24,12 +24,7 @@ import shareLink from './src/components/shareLink.vue'
 
 import nuxtLink from './src/components/nuxtLink.vue'
 
-/**
- * @param store.registerModule
- * @param config.apiUrl
- * @param config.backendUrl
- */
-export default {
+export default () => ({
   install: function (Vue, {store, config}) {
     configPlugin.init(config)
 
@@ -44,7 +39,7 @@ export default {
     Vue.use(appNotify)
 
     Vue.use(ensureLogin)
-    Vue.use(i18nPlugin, {store})
+    Vue.use(createI18nPlugin(), {store})
 
     Vue.component('icons8-components', icons8Components)
 
@@ -62,4 +57,4 @@ export default {
       Vue.component('nuxt-link', nuxtLink)
     }
   }
-}
+})
