@@ -1,11 +1,11 @@
 'use strict'
 
-const i18nPlugin = {
-  install (Vue) {
+const createI18nPlugin = () => ({
+  install (Vue, {store}) {
     const $t = function (key, props, defaultString) {
       key = '' + key
       let keys = key.split('.')
-      let value = this.$store.state.lang.translation
+      let value = store.state.lang.translation
       keys.some((k) => {
         if (value) {
           value = value[k]
@@ -29,6 +29,6 @@ const i18nPlugin = {
     Vue.prototype.$t = $t
     Vue.$t = $t
   }
-}
+})
 
-export default i18nPlugin
+export default createI18nPlugin
