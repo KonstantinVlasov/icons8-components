@@ -15,7 +15,7 @@
     .app-menu-responsive(v-bind:class="{'is-active': show}")
       .app-menu-center
         a.app-menu-item(v-bind:href="baseUrl + '/icon'") {{ $t('MENU.ICONS', 'Icons') }}
-        a.app-menu-item.is-sounds(v-bind:href="baseUrl + '/sounds'") {{ $t('MENU.SOUNDS', 'Sounds') }}
+        a.app-menu-item.is-sounds(v-bind:href="baseUrl + '/music'") {{ $t('MENU.MUSIC', 'Music') }}
         // a.app-menu-item.is-photos(v-bind:href="baseUrl + '/photos'") {{ $t('MENU.PHOTOS', 'Photos') }}
         .app-menu-item
           app-popup.app-menu-submenu(
@@ -36,6 +36,11 @@
                   | Icons8 Lunacy
                   br
                   small {{ $t('MENU.LUNACY_DESC', 'Sketch Viewer for Windows') }}
+                a.app-menu-submenu-item(v-bind:href="baseUrl + '/sounds'")
+                  img.app-menu-image(src="../assets/images/sounds-96.png")
+                  | Icons8 Sounds
+                  br
+                  small {{ $t('MENU.SOUNDS_DESC', 'Free sounds for emoji and 1000 UI sound effects') }}
 
         a.app-menu-item(v-bind:href="baseUrl + '/request-icon'") {{ $t('MENU.REQUEST', 'Request') }}
         a.app-menu-item(v-bind:href="baseUrl + '/paid-license-99'") {{ $t('MENU.BUY', 'Buy') }}
@@ -421,7 +426,8 @@
     }
 
     .app-menu-submenu-item {
-      display: block;
+      float: left;
+      width: 100%;
       margin-bottom: 1rem;
       border-color: transparent;
       text-decoration: none;
@@ -430,6 +436,8 @@
 
       &>small {
         color: $color-font-light;
+        float: left;
+        width: calc(100% - 68px);
       }
     }
 
