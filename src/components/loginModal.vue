@@ -3,13 +3,13 @@
     app-modal(
       ref="modal"
       name="login-modal"
-      v-bind:width="360"
+      v-bind:width="380"
       v-bind:content-class="'login-form'"
       v-on:shown="shown"
     )
       template(v-if="mode === 'login'")
         h3.title {{ loginTitleText }}
-        .description {{ description }}
+        .description(v-if="descriptionText") {{ descriptionText }}
         form.is-big(v-on:submit.prevent="submit('login')")
           .form-item
             input(v-model="email" name="email" placeholder="email" v-bind:class="emailClasses")
@@ -24,7 +24,7 @@
 
       template(v-if="mode === 'register'")
         h3.title {{ registerTitleText }}
-        .description {{ description }}
+        .description(v-if="descriptionText") {{ descriptionText }}
         form.is-big(v-on:submit.prevent="submit('register')")
           .form-item
             input(v-model="email" name="email" placeholder="email" v-bind:class="emailClasses")
@@ -57,16 +57,13 @@
         password: '',
         isLoading: false,
         mode: undefined,
-        errors: {password: false, email: false}
+        errors: {password: false, email: false},
+        registerTitleText: '',
+        loginTitleText: '',
+        descriptionText: ''
       }
     },
     computed: {
-      registerTitleText () {
-        return this.registerTitle || this.$t('WEB_APP.REGISTER_MODAL.REGISTER', 'Register')
-      },
-      loginTitleText () {
-        return this.loginTitle || this.$t('WEB_APP.REGISTER_MODAL.LOGIN', 'Login')
-      },
       emailClasses () {
         return {
           'is-invalid': this.errors.email
@@ -85,6 +82,9 @@
       }),
       shown (params) {
         this.mode = params.mode || 'login'
+        this.registerTitleText = params.registerTitle || this.registerTitle || this.$t('WEB_APP.REGISTER_MODAL.REGISTER', 'Register')
+        this.loginTitleText = params.loginTitle || this.loginTitle || this.$t('WEB_APP.REGISTER_MODAL.LOGIN', 'Login')
+        this.descriptionText = params.description || this.description || ''
       },
       submit (action) {
         this.isLoading = true
@@ -129,14 +129,22 @@
     & /deep/ .login-form {
       padding: 0 2rem 2rem;
       text-align: center;
+      line-height: 1.4;
 
       &>.title {
         color: #4a4a4a;
-        margin: 1.75rem 0;
+        margin: 1.75rem 0 0.75rem;
+      }
+      &>form {
+        margin-top: 1.75rem;
       }
       &>.switch-mode {
         display: inline-block;
         margin-top: 0.5rem;
+      }
+      &>.description {
+        margin-bottom: 1rem;
+        font-size: 18px;
       }
     }
   }

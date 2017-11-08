@@ -1,20 +1,25 @@
 'use strict'
 
-const ensureLoginPlugin = {
-  install (Vue) {
-    Vue.prototype.$ensureLogin = function (user) {
+const createEnsureLoginPlugin = () => ({
+  install (Vue, {store}) {
+    Vue.prototype.$ensureLogin = function (options) {
       return new Promise(function (resolve) {
-        if (!user.isGuest) {
+        if (options.user && !options.user.isGuest) {
           resolve()
-        } else {
-          Vue.$modal.show('login-modal', {
-            callback: resolve
-          })
+          return
         }
+        if (!store.auth.user.isGuest) {
+          resolve()
+          return
+        }
+        Vue.$modal.show('login-modal', {
+          callback: resolve,
+          ...options
+        })
       })
     }
     return null
   }
-}
+})
 
-export default ensureLoginPlugin
+export default createEnsureLoginPlugin

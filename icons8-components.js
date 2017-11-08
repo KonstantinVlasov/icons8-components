@@ -7,7 +7,7 @@ import appModal from './src/components/appModal'
 import appNotify from './src/components/appNotify'
 
 import createI18nPlugin from './src/plugins/i18n'
-import ensureLogin from './src/plugins/ensureLogin'
+import createEnsureLoginPlugin from './src/plugins/ensureLogin'
 import configPlugin from './src/plugins/config'
 
 import icons8Components from './src/components/icons8Components.vue'
@@ -38,7 +38,7 @@ export default () => ({
     Vue.use(appModal)
     Vue.use(appNotify)
 
-    Vue.use(ensureLogin)
+    Vue.use(createEnsureLoginPlugin(), {store})
     Vue.use(createI18nPlugin(), {store})
 
     Vue.component('icons8-components', icons8Components)
