@@ -2,13 +2,11 @@
 
 const createEnsureLoginPlugin = () => ({
   install (Vue, {store}) {
-    Vue.prototype.$ensureLogin = function (options) {
+    Vue.prototype.$ensureLogin = function (options = {
+      user: store.state.auth.user
+    }) {
       return new Promise(function (resolve) {
         if (options.user && !options.user.isGuest) {
-          resolve()
-          return
-        }
-        if (!store.state.auth.user.isGuest) {
           resolve()
           return
         }
