@@ -8,7 +8,7 @@ const createEnsureLoginPlugin = () => ({
           resolve()
           return
         }
-        if (!store.auth.user.isGuest) {
+        if (!store.state.auth.user.isGuest) {
           resolve()
           return
         }
