@@ -3,41 +3,43 @@
     app-modal(
       ref="modal"
       name="login-modal"
-      v-bind:width="380"
+      v-bind:width="450"
       v-bind:content-class="'login-form'"
       v-on:shown="shown"
     )
       template(v-if="mode === 'login'")
         h3.title {{ loginTitleText }}
-        .description(v-if="descriptionText") {{ descriptionText }}
+        .description(v-if="descriptionText" v-html="descriptionText")
         form.is-big(v-on:submit.prevent="submit('login')")
-          .form-item
-            input(v-model="email" name="email" placeholder="email" v-bind:class="emailClasses")
-          .form-item
-            input(v-model="password" type="password" name="password" placeholder="password" v-bind:class="passwordClasses")
+          div
+            .form-item
+              input(v-model="email" name="email" placeholder="Email" v-bind:class="emailClasses")
+            .form-item
+              input(v-model="password" type="password" name="password" placeholder="Password" v-bind:class="passwordClasses")
           .form-controls
             button.button(
               type="submit"
               v-bind:class="{'is-loading': isLoading}"
             ) {{ $t('WEB_APP.REGISTER_MODAL.LOGIN', 'Login') }}
-        a.switch-mode(v-on:click="mode='register'") {{ $t('WEB_APP.REGISTER_MODAL.REGISTER', 'Register') }}
+            a.switch-mode(v-on:click="mode='register'") {{ $t('WEB_APP.REGISTER_MODAL.REGISTER', 'Register') }}
 
       template(v-if="mode === 'register'")
         h3.title {{ registerTitleText }}
-        .description(v-if="descriptionText") {{ descriptionText }}
+        .description(v-if="descriptionText" v-html="descriptionText")
         form.is-big(v-on:submit.prevent="submit('register')")
-          .form-item
-            input(v-model="email" name="email" placeholder="email" v-bind:class="emailClasses")
-          .form-item
-            input(v-model="name" name="name" placeholder="name")
-          .form-item
-            input(v-model="password" type="password" name="password" placeholder="password" v-bind:class="passwordClasses")
+          div
+            .form-item
+              input(v-model="email" name="email" placeholder="Email" v-bind:class="emailClasses")
+            .form-item
+              input(v-model="name" name="name" placeholder="Name")
+            .form-item
+              input(v-model="password" type="password" name="password" placeholder="Password" v-bind:class="passwordClasses")
           .form-controls
             button.button(
               type="submit"
               v-bind:class="{'is-loading': isLoading}"
             ) {{ $t('WEB_APP.REGISTER_MODAL.CREATE_ACCOUNT', 'Create Account') }}
-        a.switch-mode(v-on:click="mode='login'") {{ $t('WEB_APP.REGISTER_MODAL.LOGIN', 'Login') }}
+            a.switch-mode(v-on:click="mode='login'") {{ $t('WEB_APP.REGISTER_MODAL.LOGIN', 'Login') }}
 </template>
 
 <script>
@@ -127,20 +129,38 @@
   .login-modal {
 
     & /deep/ .login-form {
-      padding: 0 2rem 2rem;
-      text-align: center;
+      padding: 0 4rem 3.25rem;
+      text-align: left;
       line-height: 1.4;
 
       &>.title {
         color: #4a4a4a;
-        margin: 1.75rem 0 0.75rem;
+        margin: 2.75rem 0 0.25rem;
       }
       &>form {
         margin-top: 1.75rem;
+
+        .form-item {
+          margin: 0;
+          &>input {
+            border-radius: 0;
+          }
+          &:first-child>input {
+            border-radius: 4px 4px 0 0;
+          }
+          &:last-child>input {
+            border-radius: 0 0 4px 4px;
+          }
+          &:not(:last-child)>input {
+            border-bottom: none;
+          }
+        }
       }
-      &>.switch-mode {
+      .switch-mode {
         display: inline-block;
+        font-size: 1.125rem;
         margin-top: 0.5rem;
+        margin-left: 1.25rem;
       }
       &>.description {
         margin-bottom: 1rem;
