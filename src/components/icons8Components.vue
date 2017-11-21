@@ -1,5 +1,6 @@
 <template lang="pug">
   .icons8-components
+    app-intercom
     app-notify
     login-modal
     buy-modal

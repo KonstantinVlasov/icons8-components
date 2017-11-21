@@ -12,8 +12,10 @@ import configPlugin from './src/plugins/config'
 
 import icons8Components from './src/components/icons8Components.vue'
 
+import appIntercom from './src/components/appIntercom'
 import appMenu from './src/components/appMenu.vue'
 import appPopup from './src/components/appPopup.vue'
+import buyModal from './src/components/buyModal.vue'
 import colorPicker from './src/components/colorPicker.vue'
 import loginModal from './src/components/loginModal.vue'
 import menuList from './src/components/menuList.vue'
@@ -43,8 +45,10 @@ export default () => ({
 
     Vue.component('icons8-components', icons8Components)
 
+    Vue.component('app-intercom', appIntercom)
     Vue.component('app-menu', appMenu)
     Vue.component('app-popup', appPopup)
+    Vue.component('buy-modal', buyModal)
     Vue.component('color-picker', colorPicker)
     Vue.component('login-modal', loginModal)
     Vue.component('menu-list', menuList)
