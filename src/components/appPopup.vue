@@ -57,6 +57,10 @@
         this.show = !this.show
         this.$emit(this.show ? 'open' : 'close')
       },
+      openPopup () {
+        this.show = true
+        this.$emit('open')
+      },
       closePopup () {
         this.show = false
         this.$emit('close')
