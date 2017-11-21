@@ -12,7 +12,7 @@ import configPlugin from './src/plugins/config'
 
 import icons8Components from './src/components/icons8Components.vue'
 
-import appIntercom from './src/components/appIntercom'
+import appIntercom from './src/components/appIntercom.vue'
 import appMenu from './src/components/appMenu.vue'
 import appPopup from './src/components/appPopup.vue'
 import buyModal from './src/components/buyModal.vue'
